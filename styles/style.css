@@ -15,6 +15,486 @@
 */
 
 .page {
+  font-family: var(--main-font), sans-serif;
+  font-size: var(--card-text-size);
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  background-color: var(--background-color);
+  color: var(--accent-color);
+  background-image: var(--background-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
 }
+
+@supports (font-variation-settings: normal) {
+  .page {
+    font-weight: var(--card-text-weight, 400);
+  }
+}
+
+.content {
+  inline-size: var(--content-width);
+  margin: 0 auto; 
+}
+
+.header {
+  font-family: var(--accent-font);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: 100px;
+  margin-block-end: 100px;
+}
+
+.header__theme-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background-color: var(--background-color);
+  border: 2px solid var(--accent-color);
+  /* За 1rem берется размер шрифта 16px...почему 16 непонятно */
+  padding-block-start: clamp(7.5rem, 6.346rem + 4.923vw, 8.5rem);
+  padding-block-end: 25px;
+  inline-size: inherit;
+}
+
+.theme-menu__logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.theme-menu__title {
+  font-size: clamp(3rem, 2.626rem + 1.596vw, 4.063rem);
+}
+
+.theme-menu__subtitle {
+  font-size: clamp(0.875rem, 0.677rem + 0.845vw, 1.438rem);
+  text-transform: uppercase;
+}
+
+.theme-menu__list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 14px;
+}
+
+.theme-menu__item:disabled {
+  pointer-events: none;
+}
+
+.theme-menu__button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  text-transform: uppercase;
+  padding: 0;
+  transition: opacity 0.3s ease;
+}
+
+.theme-menu__button:hover, .theme-menu__button:disabled {
+  opacity: 0.6;
+}
+
+.theme-menu__button::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.theme-menu__button:focus {
+  outline: none;
+  opacity: 0.6;
+}
+
+.theme-menu__button:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@keyframes arrow {
+  from {
+    left: -20px;
+  }
+  to {
+    left: -16px;
+  }
+}
+
+.theme-menu__button:disabled::before {
+  content: "▶";
+  position: absolute;
+  top: 0;
+  left: -20px;
+  animation: arrow 0.5s ease-in-out infinite alternate;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  inline-size: inherit;
+  background-color: var(--background-color);
+  border: 2px solid var(--accent-color); 
+}
+
+.card__title {
+  font-family: inherit;
+  font-weight: var(--card-title-weight);
+  font-size: inherit;
+  /* Не понимаю как тут сделать padding адаптивным(на 1440 низ и верх 3px) */
+  padding: 4px 10px 6px;
+}
+
+.card__image-container {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-top: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+}
+
+.card__image {
+  inline-size: 100%;
+  display: block;
+  /* Чтобы не было видно черной рамки у картинки */
+  scale: 1.02;
+  transition: filter 0.3s linear
+}
+
+.card__image-first:hover {
+  filter: contrast(130%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-second:hover {
+  filter: brightness(115%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-third:hover {
+  filter: hue-rotate(90deg);
+  transition: filter 0.3s linear;
+}
+
+.card__image-forth {
+  filter: grayscale(100%) blur(2px);
+}
+
+.card__image-forth:hover {
+  filter: grayscale(0%) blur(0);
+  transition: filter 0.3s linear;
+}
+
+.card__image-fifth:hover {
+  filter: sepia(100%) saturate(60%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-sixth:hover {
+  filter: invert(75%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-seventh:hover {
+  filter: brightness(130%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-eighth {
+  filter: brightness(10%);
+}
+
+.card__image-eighth:hover {
+  filter: brightness(100%);
+  transition: filter 0.3s linear;
+}
+
+.card__image-label {
+  position: absolute;
+  top: 25px;
+  right: clamp(0.813rem, 0.548rem + 1.127vw, 1.563rem);
+  font-family: var(--accent-font);
+  font-size: 14px;
+  mix-blend-mode: hard-light;
+}
+
+@supports((text-stroke: 1px var(--text-stroke)) or (-webkit-text-stroke: 1px var(--text-stroke))) {
+  .card__image-label {
+    -webkit-text-stroke: 1px var(--text-stroke);
+    text-stroke: 1px var(--text-stroke);
+    text-shadow: none;
+    opacity: 50%;
+  }
+}
+
+.card__content-wrapper {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.card__text {
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  line-height: 21px;
+}
+
+.card__buttons {
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.card__icon-button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  outline: 2px solid transparent;
+  outline-offset: -2px;
+  /* Чтобы удалить ненужные пробелы */
+  font-size: 0;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  outline: 2px solid var(--accent-color);
+  transition: 0.3s ease;
+}
+
+@keyframes zoom {
+  from {
+    scale: 1;
+  }
+  to {
+    scale: 1.5;
+  }
+}
+
+/* transfor-origin, чтобы анимация происходила относительно центра */
+.like-icon.is-liked .like-icon__heart {
+  transform-origin: center;
+  animation: zoom 0.3s ease-in 0.1s backwards;
+}
+
+.like-icon__contour {
+  fill: var(--contour-color);
+  transition: fill 0.1s linear;
+}
+
+.like-icon.is-liked .like-icon__contour {
+  fill: var(--fill-color);
+  transition: fill 0.3s linear 0.06s;
+}
+
+.like-icon__main-body {
+  fill: transparent;
+  transition: fill 0.3s linear;
+}
+
+.like-icon:hover .like-icon__main-body {
+  fill: var(--contour-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon:active .like-icon__main-body {
+  fill: var(--fill-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon.is-liked .like-icon__main-body {
+  fill: var(--fill-color);
+  transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon__core {
+  fill: transparent;
+  transition: fill 0.3s linear 0.03s;
+}
+
+/* transition начал отрабатывать, только когда поменял fill в элементах на transparent */
+.like-icon:hover .like-icon__core {
+  fill: var(--contour-color);
+  transition: fill 0.3s linear;
+}
+
+.like-icon:active .like-icon__core {
+  fill: var(--fill-color);
+  transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .like-icon__core {
+  fill: var(--fill-color);
+  transition: fill 0.3s linear;
+}
+
+.like-icon__sparks {
+  opacity: 0;
+}
+
+@keyframes sparks {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+.like-icon.is-liked .like-icon__sparks {
+  animation: sparks 0.3s ease-in 0.3s backwards;
+}
+
+.button {
+  position: relative;
+  border: 2px solid var(--accent-color);
+  background-color: var(--background-color);
+  overflow: hidden;
+  font-family: var(--accent-font);
+  font-size: 14px;
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 2px 2px 0 0 var(--accent-color);
+  transition: 0.3s ease;
+}
+
+.button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  background-color: var(--accent-color);
+  transform-origin: left;
+  transform: translate(-100%);
+  transition: 0.5s ease-in-out;
+}
+
+.button:hover::before {
+  transform: translate(0);
+}
+
+.card__like-button {
+  inline-size: 130px;
+  block-size: 38px;
+}
+
+.button__text {
+  color: var(--text-color-difference);
+  mix-blend-mode: difference;
+}
+
+.footer {
+  margin-block-start: 50px;
+  margin-block-end: 100px;
+}
+
+.button-save {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  /* 13 и 18 из-за border у button */
+  padding: 13px 18px;
+  margin: 0 auto;
+}
+
+.button-save__icon {
+  inline-size: 28px;
+  block-size: 28px;
+  fill: var(--text-color-difference);
+  mix-blend-mode: difference;
+}
+
+@media (width >= 768px) {
+  .button-save {
+    flex-direction: row;
+  }
+
+  .button-save__icon {
+    inline-size: 21px;
+    block-size: 21px;
+  }
+}
+
+.floppy-banner[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.floppy-banner {
+  border: 2px solid var(--accent-color);
+  background-color: var(--background-color);
+  padding: 28px 40px;
+  /*
+  block-size: 191px;  
+  min-inline-size: clamp(21.313rem, 21.048rem + 1.127vw, 22.063rem);
+  */
+}
+
+@media (width >= 768px) {
+  .floppy-banner {
+    padding: 28px;
+  }
+}
+
+.floppy-banner::backdrop {
+  background-color: #000;
+  opacity: 75%;
+}
+
+.dialog-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.dialog-text {
+  font-family: var(--accent-font);
+  color: var(--accent-color);
+  font-size: 14px; 
+  text-transform: uppercase;
+  line-height: 150%;
+  block-size: 63px;
+  inline-size: clamp(12.375rem, 11.583rem + 3.38vw, 14.625rem);
+}
+
+.dialog-icon {
+  inline-size: 39px;
+  block-size: 39px;
+}
+
+.dialog-button {
+  min-block-size: 38px;
+  inline-size: clamp(16.063rem, 15.27rem + 3.38vw, 18.313rem);
+  text-transform: uppercase;
+}
+
