@@ -10,13 +10,13 @@
     --accent-color: #000;
     --background-image: 
     repeating-linear-gradient(
-        #d3d3d3 2px, 
-        transparent 4px
+        #d3d3d3 0 2px, 
+        transparent 2px 4px
     ),
     repeating-linear-gradient(
         90deg, 
-        #d3d3d3 2px, 
-        transparent 4px
+        #d3d3d3 0 2px, 
+        transparent 2px 4px
     ),
     linear-gradient(
         #e7e7e7 0.01% 0.01%, 

@@ -12,3 +12,95 @@
 
 Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 */
+
+@keyframes arrow {
+    from {
+        left: -20px;
+    }
+    to {
+        left: -16px;
+    }
+}
+
+@keyframes zoom {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.5;
+    }   
+}
+
+/* transfor-origin, чтобы анимация происходила относительно центра */
+.like-icon.is-liked .like-icon__heart {
+    transform-origin: center;
+    animation: zoom 0.3s ease-in 0.1s alternate;
+}
+
+.like-icon__contour {
+    fill: var(--contour-color);
+    transition: fill 0.1s linear;
+}
+
+.like-icon.is-liked .like-icon__contour {
+    fill: var(--fill-color);
+    transition: fill 0.3s linear 0.06s;
+}
+
+.like-icon__main-body {
+    fill: transparent;
+    transition: fill 0.3s linear;
+}
+
+.like-icon:hover .like-icon__main-body {
+    fill: var(--contour-color);
+    transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon:active .like-icon__main-body {
+    fill: var(--fill-color);
+    transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon.is-liked .like-icon__main-body {
+    fill: var(--fill-color);
+    transition: fill 0.3s linear 0.05s;
+}
+
+.like-icon__core {
+    fill: transparent;
+    transition: fill 0.3s linear 0.03s;
+}
+
+/* transition начал отрабатывать, только когда поменял fill в элементах на transparent */
+.like-icon:hover .like-icon__core {
+    fill: var(--contour-color);
+    transition: fill 0.3s linear;
+}
+
+.like-icon:active .like-icon__core {
+    fill: var(--fill-color);
+    transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .like-icon__core {
+    fill: var(--fill-color);
+    transition: fill 0.3s linear;
+}
+
+.like-icon__sparks {
+    opacity: 0;
+}
+
+@keyframes sparks {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+.like-icon.is-liked .like-icon__sparks {
+    animation: sparks 0.3s ease-in 0.3s alternate;
+}
