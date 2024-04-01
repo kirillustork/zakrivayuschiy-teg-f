@@ -102,6 +102,7 @@
   text-transform: uppercase;
   padding: 0;
   transition: opacity 0.3s ease;
+  cursor: pointer;
 }
 
 .theme-menu__button:disabled {
@@ -267,6 +268,10 @@
   display: flex;
   justify-content: center;
   gap: 4px;
+}
+
+.like-icon {
+  cursor: pointer;
 }
 
 .card__icon-button {
